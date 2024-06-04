@@ -1185,10 +1185,10 @@ class FormBuilder
     protected function getUrlAction($options)
     {
         if (is_array($options)) {
-            return $this->url->to($options[0], array_slice($options, 1), $this->request->isSecure());
+            return $this->url->to($options[0], array_slice($options, 1), env('APP_ENV') != 'local');
         }
 
-        return $this->url->to($options, [], $this->request->isSecure());
+        return $this->url->to($options, [], env('APP_ENV') != 'local');
     }
 
     /**
