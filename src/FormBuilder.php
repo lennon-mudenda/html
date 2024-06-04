@@ -142,7 +142,7 @@ class FormBuilder
         // actual method since forms don't support the reserved methods in HTML.
         $attributes['method'] = $this->getMethod($method);
 
-        $attributes['action'] = $this->getAction($options);
+        $attributes['action'] = $this->secure($this->getAction($options));
 
         $attributes['accept-charset'] = 'UTF-8';
 
@@ -170,6 +170,19 @@ class FormBuilder
         $attributes = $this->html->attributes($attributes);
 
         return $this->toHtmlString('<form' . $attributes . '>' . $append);
+    }
+
+    protected function secure($url)
+    {
+        if (str_contains($url, "https")) {
+            return $url;
+        }
+
+        if (str_contains(config('app.url'), "https")) {
+            return str_replace("http", "https", $url);
+        } else {
+            return $url;
+        }
     }
 
     /**
@@ -1185,7 +1198,6 @@ class FormBuilder
      */
     protected function getUrlAction($options)
     {
-        Log::debug("URL Action " . $this->url->to($options, [], env('APP_ENV') != 'local') . " ");
         if (is_array($options)) {
             return $this->url->to($options[0], array_slice($options, 1), env('APP_ENV') != 'local');
         }
