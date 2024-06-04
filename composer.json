@@ -36,7 +36,7 @@
     },
     "autoload": {
         "psr-4": {
-            "LennonMudenda\\Html\\": "src/"
+            "Collective\\Html\\": "src/"
         },
         "files": [
             "src/helpers.php"
@@ -48,11 +48,11 @@
         },
         "laravel": {
             "providers": [
-                "LennonMudenda\\Html\\HtmlServiceProvider"
+                "Collective\\Html\\HtmlServiceProvider"
             ],
             "aliases": {
-                "Form": "LennonMudenda\\Html\\FormFacade",
-                "Html": "LennonMudenda\\Html\\HtmlFacade"
+                "Form": "Collective\\Html\\FormFacade",
+                "Html": "Collective\\Html\\HtmlFacade"
             }
         }
     },
