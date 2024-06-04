@@ -11,6 +11,7 @@ use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Traits\Macroable;
 
@@ -1184,6 +1185,7 @@ class FormBuilder
      */
     protected function getUrlAction($options)
     {
+        Log::debug("URL Action " . $this->url->to($options, [], env('APP_ENV') != 'local') . " " . env('APP_ENV') != 'local');
         if (is_array($options)) {
             return $this->url->to($options[0], array_slice($options, 1), env('APP_ENV') != 'local');
         }
